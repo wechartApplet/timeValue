@@ -1,0 +1,1 @@
+<view class="container data-v-1cf27b2a"><view class="input-container data-v-1cf27b2a"><text class="label data-v-1cf27b2a">请输入你的工资：</text><input class="input data-v-1cf27b2a" type="number" placeholder="请输入数字" bindinput="{{a}}" value="{{b}}"/></view></view>
