@@ -10,7 +10,6 @@ export function calculateBachelorDate(gaokaoDate) {
   const bachelorYear = gaokaoYear + 4; // 本科毕业年份（高考后4年）
   return `${bachelorYear}-06-07`; // 本科毕业日期固定为6月7日
 }
-
 export function calculateMasterDate(bachelorDate) {
   const bachelorYear = new Date(bachelorDate).getFullYear(); // 本科毕业年份
   const masterYear = bachelorYear + 3; // 硕士毕业年份（本科毕业后3年）
