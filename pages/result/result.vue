@@ -42,7 +42,7 @@
 			<view class="divider-container">
 				<view class="divider">
 					<view class="divider_line"></view>
-					<text class="divider_text">算你25岁开始工作</text>
+					<text class="divider_text">算你25岁开始工作且永不失业</text>
 					<view class="divider_line"></view>
 				</view>
 			</view>
@@ -166,9 +166,10 @@
 	} from 'vue-router'; // 引入 useRoute
 	import {
 		calculateExamDate
-	} from '@/utils/calculators/calculateEducationDates.js'
-
-
+	} from '@/utils/calculators/calculateEducationDates.js';
+	import {
+		calculateTimePrice
+	} from '@/utils/calculators/calculateTimePrice.js'
 	export default {
 		setup(props, context) {
 
@@ -180,7 +181,8 @@
 			const highExamDate = ref(""); // 高考日期
 			const GradExamDate = ref(""); // 研考日期
 			const masterDate = ref(""); // 硕士毕业日期
-
+			const timePerCent = ref(0); // 赚一分钱所需的时间（秒）
+			const moneyPerSecond = ref(0); // 每秒赚的钱
 
 
 			// 接收页面传递的参数
@@ -197,17 +199,20 @@
 
 					// 根据接收到的参数进行处理
 					const examDates = calculateExamDate(birthDate);
+					const timePrice = calculateTimePrice(monthlySalary);
 
 					console.log(examDates);
 					// 显示结果
 					showResults_man.value = !Boolean(gender - 0);
 					showResults_woman.value = Boolean(gender - 0);
-
+					// 考试日期
 					middleExamDate.value = examDates.middleExamDate;
 					highExamDate.value = examDates.highExamDate;
 					GradExamDate.value = examDates.GradExamDate;
 					masterDate.value = examDates.masterDate;
-
+					// 时间单价
+					timePerCent.value = timePrice.timePerCent;
+					moneyPerSecond.value = timePrice.moneyPerSecond;
 
 
 
@@ -220,8 +225,7 @@
 			// const ageAtBachelor = ref(22);
 			// const ageAtMaster = ref(25);
 
-			// const timePerCent = ref(0); // 赚一分钱所需的时间（秒）
-			// const moneyPerSecond = ref(0); // 每秒赚的钱
+
 			// const timeForFiveMillion = ref(0); // 赚够500万所需的时间（年）
 			// const timeForThreeHundredMillion = ref(0); // 赚够3亿所需的时间（年）
 			// const timeForHouse = ref(0); // 赚够150万房产所需的时间（年）
@@ -292,8 +296,8 @@
 				highExamDate,
 				GradExamDate,
 				masterDate,
-				// 	timePerCent,
-				// 	moneyPerSecond,
+				timePerCent,
+				moneyPerSecond,
 				// 	timeForFiveMillion,
 				// 	timeForThreeHundredMillion,
 				// 	timeForHouse,

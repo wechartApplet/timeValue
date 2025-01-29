@@ -1,5 +1,9 @@
-// 计算每秒赚的钱和赚一分钱需要的时间
-export function calculateSalary(monthlySalary) {
+
+/**
+ * 计算每秒赚的钱和赚一分钱需要的时间
+ * @param {Object} monthlySalary
+ */
+export function calculateTimePrice(monthlySalary) {
   // 假设每月工作30天，每天工作24小时
   const workingDaysPerMonth = 30;
   const workingHoursPerDay = 24;
