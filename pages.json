@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "时间价值计算器"
 			}
+		},
+		{
+			"path":"pages/result/result",
+			"style": {
+				"navigationBarTitleText": "时间价值计算器"
+			}
 		}
 	],
 	"globalStyle": {
