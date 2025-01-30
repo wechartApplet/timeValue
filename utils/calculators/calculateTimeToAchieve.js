@@ -1,5 +1,9 @@
-// 计算赚够特定金额所需的时间
-export function calculateTimeToAchieve(monthlySalary) {
+
+/**
+ * 计算赚够特定金额所需的时间
+ * @param {Object} monthlySalary
+ */
+export function calculateTimeToAchieve_old(monthlySalary) {
   // 定义目标金额
   const fiveMillion = 5000000; // 500万
   const threeHundredMillion = 300000000; // 3亿
@@ -21,4 +25,14 @@ export function calculateTimeToAchieve(monthlySalary) {
     timeForCar, // 赚够50万小车所需的时间（年）
     timeForMarriage // 准备40万彩礼和婚礼所需的时间（年）
   };
+}
+
+/**
+ * 计算特定金额所需要的时间 
+ * 返回的时小数点两位的年 例 7.26 年
+ * @param {Object} monthlySalary
+ * @param {Object} money
+ */
+export function calculateTimeToAchieve(monthlySalary,money) {
+	return (money / monthlySalary / 12).toFixed(2);
 }

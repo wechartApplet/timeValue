@@ -10,6 +10,7 @@
 </p>
 
 # 时间价值计算器
+
  + 此项目是一个uni-app基于Vue3的小项目，皆在计算牛马一生的时间与金钱的关系
 
 ### 开发环境
@@ -54,10 +55,12 @@
 
 #### 一、IDEA快捷键的使用
 
-1. 快速复制上一行代码
-2. 快速上或下移动当前行代码
-3. 快速删除当前行代码
-4. 代码格式化
+1. 快速复制上一行代码 ctrl + D
+2. 快速上或下移动当前行代码 ctrl + shift + up/dn
+3. 快速删除当前行代码 ctrl + y
+4. 代码格式化 ctrl + alt + L
 
 ### 参考链接
 
+1. [uView](https://uviewui.com/components/changeGuide.html)
+2. [大厂公积金缴纳比例一览表](https://blog.csdn.net/weixin_45727359/article/details/135639219)

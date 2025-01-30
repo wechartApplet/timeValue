@@ -169,20 +169,43 @@
 	} from '@/utils/calculators/calculateEducationDates.js';
 	import {
 		calculateTimePrice
-	} from '@/utils/calculators/calculateTimePrice.js'
+	} from '@/utils/calculators/calculateTimePrice.js';
+	import {
+		calculateTimeToAchieve
+	} from '@/utils/calculators/calculateTimeToAchieve.js';
+	import {
+		convertYearToYearMonthDay,
+		currentDate,
+		addYearsToDate
+	} from '@/utils/common/common.js';
+
+
 	export default {
 		setup(props, context) {
 
 			const route = useRoute(); // 使用 useRoute 获取路由对象
-
+			// 选择男/女对应显示模块开关
 			const showResults_man = ref(false); // 是否显示 男 的结果
 			const showResults_woman = ref(false); // 是否显 女 的示结果
+			// 考试日期
 			const middleExamDate = ref(""); // 中考日期
 			const highExamDate = ref(""); // 高考日期
 			const GradExamDate = ref(""); // 研考日期
 			const masterDate = ref(""); // 硕士毕业日期
+			// 时间单价
 			const timePerCent = ref(0); // 赚一分钱所需的时间（秒）
 			const moneyPerSecond = ref(0); // 每秒赚的钱
+			// 25岁开始工作且永不失业
+			const timeForHouse = ref(0); // 赚够150万房产所需的时间（年）
+			const timeForCar = ref(0); // 赚够50万小车所需的时间（年）
+			const timeForMarriage = ref(0); // 准备40万彩礼和婚礼所需的时间（年）
+
+			const ageAtHouse = ref(0); // 赚够房产时的年龄
+			const ageAtCar = ref(0); // 赚够小车时的年龄
+			const ageAtMarriage = ref(0); // 准备婚礼时的年龄
+			const timeForFiveMillion = ref(0); // 赚够500万所需的时间（年）
+			const timeForThreeHundredMillion = ref(0); // 赚够3亿所需的时间（年）
+
 
 
 			// 接收页面传递的参数
@@ -198,10 +221,14 @@
 					const gender = params.gender;
 
 					// 根据接收到的参数进行处理
-					const examDates = calculateExamDate(birthDate);
-					const timePrice = calculateTimePrice(monthlySalary);
 
-					console.log(examDates);
+					// 考试日期 
+					const examDates = calculateExamDate(birthDate);
+					// 时间单价
+					const timePrice = calculateTimePrice(monthlySalary);
+					// 特定金额
+					// const timeToAchieve = calculateTimeToAchieve(monthlySalary)
+
 					// 显示结果
 					showResults_man.value = !Boolean(gender - 0);
 					showResults_woman.value = Boolean(gender - 0);
@@ -213,7 +240,10 @@
 					// 时间单价
 					timePerCent.value = timePrice.timePerCent;
 					moneyPerSecond.value = timePrice.moneyPerSecond;
-
+					// 25岁开始工作且永不失业
+					timeForHouse.value = calculateTimeToAchieve(monthlySalary, 5000000); // 5000,000
+					timeForCar.value = calculateTimeToAchieve(monthlySalary, 500000); // 500,000
+					timeForMarriage.value = calculateTimeToAchieve(monthlySalary, 400000); // 400,000
 
 
 				}
@@ -221,19 +251,10 @@
 
 
 
-			// const ageAtGaokao = ref(18);
-			// const ageAtBachelor = ref(22);
-			// const ageAtMaster = ref(25);
 
 
-			// const timeForFiveMillion = ref(0); // 赚够500万所需的时间（年）
-			// const timeForThreeHundredMillion = ref(0); // 赚够3亿所需的时间（年）
-			// const timeForHouse = ref(0); // 赚够150万房产所需的时间（年）
-			// const timeForCar = ref(0); // 赚够50万小车所需的时间（年）
-			// const timeForMarriage = ref(0); // 准备40万彩礼和婚礼所需的时间（年）
-			// const ageAtHouse = ref(0); // 赚够房产时的年龄
-			// const ageAtCar = ref(0); // 赚够小车时的年龄
-			// const ageAtMarriage = ref(0); // 准备婚礼时的年龄
+
+
 			// const currentAge = ref(0); // 当前年龄
 			// const moneySaved = ref(0); // 当前应攒的钱
 			// const moneyBeforeRetirement = ref(0); // 退休前还能存的钱
@@ -300,9 +321,9 @@
 				moneyPerSecond,
 				// 	timeForFiveMillion,
 				// 	timeForThreeHundredMillion,
-				// 	timeForHouse,
-				// 	timeForCar,
-				// 	timeForMarriage,
+				timeForHouse,
+				timeForCar,
+				timeForMarriage,
 				// 	ageAtHouse,
 				// 	ageAtCar,
 				// 	ageAtMarriage,
