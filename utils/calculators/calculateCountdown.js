@@ -1,7 +1,13 @@
-// 计算70岁寿终就寝的倒计时
-export function startCountdown(currentAge, setCountdown) {
+
+/**
+ * 计算 指定年龄 的倒计时
+ * @param {Object} currentAge
+ * @param {Object} endAge
+ * @param {Object} setCountdown
+ */
+export function startCountdown(currentAge, endAge,setCountdown) {
   const targetDate = new Date(); // 目标日期
-  targetDate.setFullYear(targetDate.getFullYear() + 70 - currentAge); // 假设70岁寿终就寝
+  targetDate.setFullYear(targetDate.getFullYear() + endAge - currentAge); // 假设70岁寿终就寝
 
   // 每秒更新倒计时
   const interval = setInterval(() => {

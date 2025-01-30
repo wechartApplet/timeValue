@@ -49,7 +49,6 @@
 		<view class="input-group">
 			<text v-if="hasErrors" class="label error-message">{{ errorMessage }}</text>
 		</view>
-		<!-- <view v-if="hasErrors" class="error-message">{{ errorMessage }}</view> -->
 
 		<!-- 按钮 -->
 		<view class="input-group">
@@ -72,12 +71,12 @@
 			const birthDate = ref("1990-01-01"); // 用户输入的出生日期
 			const maxDate = ref(''); // 出生日期最大值限制
 			const gender = ref(0); // 用户选择的性别
-
+			// 错误状态
 			const errors = ref({
 				monthlySalary: false,
 				companySocialSecurity: false,
 				companyProvidedHousingFund: false,
-			}); // 错误状态
+			});
 			const errorMessage = ref(''); // 错误信息
 
 			// 验证税后月薪的值
@@ -153,7 +152,7 @@
 					gender: gender.value
 				};
 				// 跳转到结果页并传递参数
-				if(!hasErrors){//没有报错才可跳转
+				if (!hasErrors.value) { //没有报错才可跳转
 					uni.navigateTo({
 						url: `/pages/result/result?data=${encodeURIComponent(JSON.stringify(params))}`,
 						success: () => {
@@ -163,26 +162,33 @@
 							console.error('跳转失败', err);
 						}
 					});
+				} else {
+					// 如果有错误，显示一个提示框
+					uni.showToast({
+						title: '请修正错误后再尝试',
+						icon: 'none', // 显示纯文本提示
+						duration: 2000 // 提示框显示时长
+					});
 				}
 			};
 
 			return {
-				monthlySalary,
-				companySocialSecurity,
-				companyProvidedHousingFund,
-				birthDate,
-				maxDate,
-				gender,
-				errors,
-				errorMessage,
-				validateMonthlySalary,
-				validateSocialSecurity,
-				validateHousingFund,
-				clearValidation,
-				handleDateChange,
-				handleGenderChange,
-				calculateTimeValue,
-				hasErrors,
+				monthlySalary, // 用户输入的税后月薪
+				companySocialSecurity, // 公司交的社保
+				companyProvidedHousingFund, // 公司交的公积金
+				birthDate, // 用户输入的出生日期
+				maxDate, // 出生日期最大值限制
+				gender, // 用户选择的性别
+				errors, // 错误状态
+				errorMessage, // 错误信息
+				validateMonthlySalary, // 验证税后月薪的值
+				validateSocialSecurity, // 验证社保金额的值
+				validateHousingFund, // 验证公积金金额的值
+				clearValidation, // 清除验证错误
+				handleDateChange, // 处理出生日期选择器的变化
+				handleGenderChange, // 处理性别选择器的变化
+				calculateTimeValue, // 点击按钮时获取所有值并跳转页面
+				hasErrors, // 是否有错误
 			};
 		},
 	};

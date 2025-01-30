@@ -50,6 +50,8 @@
 
 ### 项目效果简介
 
+![](./static/img1.png)
+![](./static/img2.png)
 
 ### 通过此项目学到了什么
 
@@ -59,6 +61,7 @@
 2. 快速上或下移动当前行代码 ctrl + shift + up/dn
 3. 快速删除当前行代码 ctrl + y
 4. 代码格式化 ctrl + alt + L
+5. IDEA跳转到指定行 ctrl + G
 
 ### 参考链接
 
