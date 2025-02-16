@@ -7,7 +7,7 @@
 			}
 		},
 		{
-			"path":"pages/result/result",
+			"path":"pages/results/Result",
 			"style": {
 				"navigationBarTitleText": "时间价值计算器"
 			}

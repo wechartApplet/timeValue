@@ -1,13 +1,13 @@
-
 /**
- * 计算 指定年龄 的倒计时
- * @param {Object} currentAge
- * @param {Object} endAge
- * @param {Object} setCountdown
+ * 计算从出生日期到目标年龄的倒计时（精确到秒）
+ * @param {Date} birthDate 出生日期
+ * @param {Number} targetAge 目标年龄
+ * @param {Function} setCountdown 更新倒计时的回调函数
  */
-export function startCountdown(currentAge, endAge,setCountdown) {
-  const targetDate = new Date(); // 目标日期
-  targetDate.setFullYear(targetDate.getFullYear() + endAge - currentAge); // 假设70岁寿终就寝
+export function startCountdown(birthDate, targetAge, setCountdown) {
+  // 计算目标日期：出生日期 + 目标年龄
+  const targetDate = new Date(birthDate.getTime());
+  targetDate.setFullYear(targetDate.getFullYear() + targetAge);
 
   // 每秒更新倒计时
   const interval = setInterval(() => {
@@ -28,13 +28,19 @@ export function startCountdown(currentAge, endAge,setCountdown) {
     }
 
     // 计算倒计时的年、月、日、时、分、秒
+    const millisecondsPerYear = 1000 * 60 * 60 * 24 * 365.25; // 每年平均天数（考虑闰年）
+    const millisecondsPerMonth = millisecondsPerYear / 12; // 每月平均天数
+    const millisecondsPerDay = 1000 * 60 * 60 * 24; // 每天的毫秒数
+    const millisecondsPerHour = 1000 * 60 * 60; // 每小时的毫秒数
+    const millisecondsPerMinute = 1000 * 60; // 每分钟的毫秒数
+
     const countdown = {
-      years: Math.floor(diff / (1000 * 60 * 60 * 24 * 365)),
-      months: Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30)),
-      days: Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((diff % (1000 * 60)) / 1000)
+      years: Math.floor(diff / millisecondsPerYear),
+      months: Math.floor((diff % millisecondsPerYear) / millisecondsPerMonth),
+      days: Math.floor((diff % millisecondsPerMonth) / millisecondsPerDay),
+      hours: Math.floor((diff % millisecondsPerDay) / millisecondsPerHour),
+      minutes: Math.floor((diff % millisecondsPerHour) / millisecondsPerMinute),
+      seconds: Math.floor((diff % millisecondsPerMinute) / 1000)
     };
 
     setCountdown(countdown); // 更新倒计时

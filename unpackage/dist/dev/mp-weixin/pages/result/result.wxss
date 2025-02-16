@@ -1,0 +1,41 @@
+
+.result.data-v-b615976f {
+		background-color: white;
+		padding: 20px;
+		border-radius: 8px;
+		margin-top: 20px;
+}
+.result-item.data-v-b615976f {
+		margin-bottom: 10px;
+}
+.result-label.data-v-b615976f {
+		font-size: 16px;
+		font-weight: bold;
+}
+.result-value.data-v-b615976f {
+		font-size: 16px;
+		color: #333;
+}
+
+	/* 分割线样式 */
+.divider-container.data-v-b615976f {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 20px 0;
+}
+.divider.data-v-b615976f {
+		display: flex;
+		align-items: center;
+		width: 100%;
+}
+.divider_line.data-v-b615976f {
+		flex: 1;
+		height: 1px;
+		background-color: #ccc;
+		margin: 0 10px;
+}
+.divider_text.data-v-b615976f {
+		/* padding: 0 10px; */
+		background-color: #fff;
+}
